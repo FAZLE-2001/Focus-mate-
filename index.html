@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Focus-Mate</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <!-- 🔗 Universal Navigation Bar -->
+  <nav class="navbar">
+    <a href="index.html">🏠 Home</a>
+    <a href="calendar.html">📅 Calendar</a>
+    <a href="summary.html">📊 Summary</a>
+    <a href="focus-break.html">🌟 Break</a>
+    <a href="game.html">🧠 Brain Game</a>
+    <a href="success-guide.html">🚀 Success Guide</a>
+  </nav>
+
+  <div class="container">
+
+    <!-- 💤 Power Nap System -->
+    <div id="powerNapBox" class="power-nap-box">
+      💤 Power Nap:
+      <input type="time" id="napTime">
+      <button onclick="saveNapTime()">Set</button>
+      <button onclick="cancelNap()">Cancel</button>
+      <div id="napCountdown"></div>
+    </div>
+
+    <!-- Nap Modal -->
+    <div id="napModal" class="nap-modal">
+      <div class="nap-modal-content">
+        <h2>⏰ Power Nap Time!</h2>
+        <p>Take a short rest now 💤</p>
+        <button onclick="snoozeNap()">Snooze 10 min</button>
+        <button onclick="closeNapModal()">Dismiss</button>
+      </div>
+    </div>
+
+    <!-- 🎯 Title -->
+    <h1>🎯 Focus-Mate</h1>
+    <p class="subtitle">
+      Your personal motivation and time management companion
+    </p>
+
+    <!-- ⏱️ Pomodoro Timer -->
+    <section id="timer-section">
+      <h2>Pomodoro Timer</h2>
+      <div id="timer">25:00</div>
+      <button id="start-btn">Start</button>
+      <button id="pause-btn">Pause</button>
+      <button id="reset-btn">Reset</button>
+    </section>
+
+    <!-- ✅ Daily Tasks -->
+    <section id="enhanced-task-section">
+      <h2>🎯 Daily Focus Tasks (6 Max)</h2>
+
+      <div id="task-container"></div>
+
+      <div id="progress-container">
+        <label>Daily Progress:</label><br />
+        <progress id="daily-progress" value="0" max="6"></progress>
+        <span id="progress-text">0 / 6 completed</span>
+      </div>
+    </section>
+
+    <!-- 💬 Motivation -->
+    <section id="quote-section">
+      <h2>Stay Motivated</h2>
+      <blockquote id="quote">
+        "The best way to get started is to quit talking and begin doing."
+      </blockquote>
+    </section>
+
+  </div>
+
+  <!-- Scripts -->
+  <script src="script.js"></script>
+  <script src="global-nap.js"></script>
+
+</body>
+</html>

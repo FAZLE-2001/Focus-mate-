@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>📊 Monthly Summary - Focus-Mate</title>
+  <link rel="stylesheet" href="style.css" />
+
+  <style>
+    #summary-controls {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    #summary-label {
+      font-size: 1.2em;
+      font-weight: bold;
+    }
+
+    #summary {
+      margin-top: 20px;
+    }
+
+    .summary-day {
+      margin: 8px 0;
+      padding: 10px;
+      background-color: #f0f0f0;
+      border-radius: 5px;
+    }
+
+    .bar {
+      height: 20px;
+      background-color: #4caf50;
+      margin-top: 5px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- 🔗 Universal Navigation -->
+  <nav class="navbar">
+    <a href="index.html">🏠 Home</a>
+    <a href="calendar.html">📅 Calendar</a>
+    <a href="summary.html">📊 Summary</a>
+    <a href="focus-break.html">🌟 Break</a>
+    <a href="game.html">🧠 Brain Game</a>
+    <a href="success-guide.html">🚀 Success Guide</a>
+  </nav>
+
+  <div class="container">
+
+    <!-- 💤 Power Nap System -->
+    <div id="powerNapBox" class="power-nap-box">
+      💤 Power Nap:
+      <input type="time" id="napTime">
+      <button onclick="saveNapTime()">Set</button>
+      <button onclick="cancelNap()">Cancel</button>
+      <div id="napCountdown"></div>
+    </div>
+
+    <!-- Nap Modal -->
+    <div id="napModal" class="nap-modal">
+      <div class="nap-modal-content">
+        <h2>⏰ Power Nap Time!</h2>
+        <p>Take a short rest now 💤</p>
+        <button onclick="snoozeNap()">Snooze 10 min</button>
+        <button onclick="closeNapModal()">Dismiss</button>
+      </div>
+    </div>
+
+    <!-- 📊 Header -->
+    <h1>📊 Monthly Task Summary</h1>
+
+    <!-- Month Navigation -->
+    <div id="summary-controls">
+      <button id="prev-summary">◀ Previous</button>
+      <div id="summary-label">Month Year</div>
+      <button id="next-summary">Next ▶</button>
+    </div>
+
+    <div id="summary"></div>
+
+  </div>
+
+  <!-- Scripts -->
+  <script src="summary.js"></script>
+  <script src="global-nap.js"></script>
+
+</body>
+</html>

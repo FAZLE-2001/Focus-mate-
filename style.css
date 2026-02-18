@@ -1,0 +1,230 @@
+/* General Reset & Styling */
+* {
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #f4f4f4;
+  color: #333;
+  padding: 20px;
+  line-height: 1.6;
+}
+
+/* Main Container */
+.container {
+  max-width: 700px;
+  margin: auto;
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Headings */
+h1 {
+  text-align: center;
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+h2 {
+  text-align: center;
+  font-size: 24px;
+  margin: 20px 0;
+}
+
+/* Navigation Bar */
+nav {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+nav a {
+  margin: 0 10px;
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+  padding: 6px 12px;
+  border-radius: 5px;
+  transition: background 0.3s;
+}
+
+nav a:hover {
+  background-color: #4caf50;
+  color: white;
+}
+
+/* Timer Display */
+#timer {
+  font-size: 48px;
+  text-align: center;
+  margin: 20px 0;
+  font-weight: bold;
+}
+
+/* Buttons */
+button {
+  padding: 10px 15px;
+  margin: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background-color: #333;
+  color: white;
+}
+
+/* Progress Section */
+#progress-container {
+  margin-top: 20px;
+  text-align: center;
+}
+
+/* Progress Bar */
+progress {
+  width: 100%;
+  height: 20px;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 10px;
+}
+
+progress::-webkit-progress-bar {
+  background-color: #eee;
+  border-radius: 10px;
+}
+
+progress::-webkit-progress-value {
+  background-color: #4caf50;
+  border-radius: 10px;
+}
+
+#progress-text {
+  display: block;
+  margin-top: 8px;
+  font-weight: bold;
+}
+
+/* Daily Task Block */
+.task-block {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.task-block input[type="text"],
+.task-block input[type="number"] {
+  padding: 8px;
+  flex: 1;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.task-block .start-task-btn {
+  background-color: #4caf50;
+  color: white;
+}
+
+.task-block .task-timer {
+  flex-shrink: 0;
+  width: 120px;
+}
+
+/* Motivational Quote */
+#quote-section blockquote {
+  font-style: italic;
+  text-align: center;
+  padding: 15px;
+  border-left: 4px solid #4caf50;
+  background: #f0fff0;
+  margin-top: 20px;
+  border-radius: 5px;
+}
+
+/* Summary & Calendar Boxes */
+.summary-day,
+.calendar-day {
+  background: #f9f9f9;
+  padding: 10px;
+  border-radius: 6px;
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+.calendar-day.completed {
+  background-color: #c8e6c9;
+  color: green;
+  font-weight: bold;
+}
+
+.calendar-day.missed {
+  background-color: #ffcdd2;
+  color: red;
+}
+
+.calendar-day.today {
+  border: 2px solid #333;
+}
+
+/* Responsive Layout */
+@media (max-width: 600px) {
+  .task-block {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  button {
+    width: 100%;
+  }
+
+  nav a {
+    display: inline-block;
+    margin: 5px 5px;
+  }
+}
+/* Success Guide Styling */
+
+.success-section {
+  margin-top: 30px;
+  padding: 20px;
+  background: #f9f9f9;
+  border-radius: 10px;
+}
+
+.success-section h2 {
+  margin-bottom: 15px;
+}
+
+textarea {
+  width: 100%;
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  margin-top: 5px;
+}
+
+.action-item,
+.evaluation-item,
+.adapt-item {
+  margin-bottom: 10px;
+}
+
+.action-item input[type="text"] {
+  width: 70%;
+  padding: 6px;
+  margin-right: 10px;
+}
+
+.adapt-item input[type="number"] {
+  width: 80px;
+  margin: 5px 10px 5px 0;
+}

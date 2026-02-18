@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🌟 How to Become Successful</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- 🔗 Universal Navigation -->
+  <nav class="navbar">
+    <a href="index.html">🏠 Home</a>
+    <a href="calendar.html">📅 Calendar</a>
+    <a href="summary.html">📊 Summary</a>
+    <a href="focus-break.html">🌟 Break</a>
+    <a href="game.html">🧠 Brain Game</a>
+    <a href="success-guide.html">🚀 Success Guide</a>
+  </nav>
+
+  <div class="container">
+
+    <!-- 💤 Power Nap System -->
+    <div id="powerNapBox" class="power-nap-box">
+      💤 Power Nap:
+      <input type="time" id="napTime">
+      <button onclick="saveNapTime()">Set</button>
+      <button onclick="cancelNap()">Cancel</button>
+      <div id="napCountdown"></div>
+    </div>
+
+    <!-- Nap Modal -->
+    <div id="napModal" class="nap-modal">
+      <div class="nap-modal-content">
+        <h2>⏰ Power Nap Time!</h2>
+        <p>Take a short rest now 💤</p>
+        <button onclick="snoozeNap()">Snooze 10 min</button>
+        <button onclick="closeNapModal()">Dismiss</button>
+      </div>
+    </div>
+
+    <h1>🌟 How to Become Successful</h1>
+    <p class="subtitle" style="text-align:center; margin-bottom:20px;">
+      Follow the 4-step formula to achieve your goal with clarity and discipline.
+    </p>
+
+    <!-- STEP 1 -->
+    <section class="success-section">
+      <h2>Step 1: Define Your Target 🎯</h2>
+
+      <label>Enter number of days to achieve your goal:</label>
+      <input type="number" id="goalDays" min="1">
+
+      <p style="margin-top:10px;">
+        <strong>Remaining Days:</strong> 
+        <span id="remainingDays">-</span>
+      </p>
+
+      <label style="margin-top:15px; display:block;">Your Goal:</label>
+      <textarea id="goalInput" rows="3"
+        placeholder="Write your goal here..."></textarea>
+    </section>
+
+    <!-- STEP 2 -->
+    <section class="success-section">
+      <h2>Step 2: Take Massive Action 🚀</h2>
+
+      <h3>Plan A</h3>
+      <div id="planA"></div>
+
+      <h3 style="margin-top:20px;">Plan B</h3>
+      <div id="planB"></div>
+
+      <button onclick="evaluatePlans()" style="margin-top:15px;">
+        📈 Evaluate Selected Actions
+      </button>
+    </section>
+
+    <!-- STEP 3 -->
+    <section class="success-section">
+      <h2>Step 3: Evaluate Options 📊</h2>
+      <div id="evaluationBox"></div>
+    </section>
+
+    <!-- STEP 4 -->
+    <section class="success-section">
+      <h2>Step 4: Adapt & Execute 🔄</h2>
+      <div id="adaptBox"></div>
+    </section>
+
+    <!-- SUCCESS MESSAGE -->
+    <h2 id="successMessage"
+        style="display:none; color:green; margin-top:20px; text-align:center;">
+      🎉 Congratulations! You have successfully completed your goal!
+    </h2>
+
+    <!-- RESET BUTTON -->
+    <div style="text-align:center; margin-top:25px;">
+      <button onclick="resetSuccessGuide()"
+              style="background:#e74c3c; color:white;">
+        🔄 Reset Goal & Start New
+      </button>
+    </div>
+
+  </div>
+
+  <!-- Scripts -->
+  <script src="success-guide.js"></script>
+  <script src="global-nap.js"></script>
+
+</body>
+</html>

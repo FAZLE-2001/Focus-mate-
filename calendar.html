@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>📅 Task Calendar - Focus-Mate</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    #calendar-controls {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    #calendar {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 10px;
+    }
+
+    .calendar-day {
+      border: 1px solid #ccc;
+      padding: 10px;
+      text-align: center;
+      border-radius: 5px;
+      min-height: 60px;
+    }
+
+    .completed {
+      background-color: #c8e6c9;
+      color: green;
+      font-weight: bold;
+    }
+
+    .missed {
+      background-color: #ffcdd2;
+      color: red;
+    }
+
+    .today {
+      border: 2px solid #333;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <!-- 🔗 Navigation -->
+    <nav style="text-align:center; margin-bottom:20px;">
+      <a href="index.html">🏠 Home</a> |
+      <a href="calendar.html">📅 Calendar</a> |
+      <a href="summary.html">📊 Summary</a> |
+      <a href="focus-break.html">🌟 Break</a> |
+      <a href="game.html">🧠 Brain Game</a> |
+      <a href="success-guide.html">🚀 Success Guide</a>
+    </nav>
+
+    <!-- 💤 Power Nap System -->
+    <div id="powerNapBox" class="power-nap-box">
+      💤 Power Nap:
+      <input type="time" id="napTime">
+      <button onclick="saveNapTime()">Set</button>
+      <button onclick="cancelNap()">Cancel</button>
+      <div id="napCountdown"></div>
+    </div>
+
+    <!-- Nap Modal -->
+    <div id="napModal" class="nap-modal">
+      <div class="nap-modal-content">
+        <h2>⏰ Power Nap Time!</h2>
+        <p>Take a short rest now 💤</p>
+        <button onclick="snoozeNap()">Snooze 10 min</button>
+        <button onclick="closeNapModal()">Dismiss</button>
+      </div>
+    </div>
+
+    <h1>📅 Task Completion Calendar</h1>
+    <p style="text-align:center;">
+      ✅ Days with 6 completed tasks will be marked
+    </p>
+
+    <div id="calendar-controls">
+      <button id="prev-month">◀️ Previous</button>
+      <h2 id="month-label">Month Year</h2>
+      <button id="next-month">Next ▶️</button>
+    </div>
+
+    <div id="calendar"></div>
+
+  </div>
+
+  <!-- Scripts -->
+  <script src="calendar.js"></script>
+  <script src="global-nap.js"></script>
+
+</body>
+</html>

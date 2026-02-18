@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🧠 Brain Game - Memory Match</title>
+  <link rel="stylesheet" href="style.css" />
+
+  <style>
+    #game-board {
+      display: grid;
+      grid-template-columns: repeat(4, 80px);
+      gap: 10px;
+      justify-content: center;
+      margin-top: 30px;
+    }
+
+    .card {
+      width: 80px;
+      height: 80px;
+      font-size: 36px;
+      background-color: #ddd;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      border-radius: 8px;
+      user-select: none;
+    }
+
+    .card.flipped {
+      background-color: white;
+    }
+
+    #game-status {
+      margin-top: 20px;
+      font-weight: bold;
+      font-size: 18px;
+      text-align: center;
+    }
+
+    .game-modal {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.6);
+    }
+
+    .game-modal-content {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      width: 300px;
+      margin: 15% auto;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+
+    <!-- 🔗 Navigation -->
+    <nav style="text-align:center; margin-bottom:20px;">
+      <a href="index.html">🏠 Home</a> |
+      <a href="calendar.html">📅 Calendar</a> |
+      <a href="summary.html">📊 Summary</a> |
+      <a href="focus-break.html">🌟 Break</a> |
+      <a href="game.html">🧠 Brain Game</a> |
+      <a href="success-guide.html">🚀 Success Guide</a>
+    </nav>
+
+    <!-- 💤 Power Nap -->
+    <div id="powerNapBox" class="power-nap-box">
+      💤 Power Nap:
+      <input type="time" id="napTime">
+      <button onclick="saveNapTime()">Set</button>
+      <button onclick="cancelNap()">Cancel</button>
+      <div id="napCountdown"></div>
+    </div>
+
+    <!-- Nap Modal -->
+    <div id="napModal" class="nap-modal">
+      <div class="nap-modal-content">
+        <h2>⏰ Power Nap Time!</h2>
+        <p>Take a short rest now 💤</p>
+        <button onclick="snoozeNap()">Snooze 10 min</button>
+        <button onclick="closeNapModal()">Dismiss</button>
+      </div>
+    </div>
+
+    <!-- 🧠 Game -->
+    <h1>🧠 Brain Game</h1>
+    <p style="text-align:center;">Match all emoji cards to win!</p>
+
+    <div id="game-board"></div>
+
+    <div id="game-status">
+      🕒 Time: <span id="timer">0</span> seconds |
+      🏆 Best: <span id="bestTime">-</span>
+    </div>
+
+    <div style="text-align:center; margin-top:15px;">
+      <button onclick="startGame()">Restart Game</button>
+    </div>
+
+  </div>
+
+  <!-- Win Modal -->
+  <div id="winModal" class="game-modal">
+    <div class="game-modal-content">
+      <h2>🎉 You Won!</h2>
+      <p id="winText"></p>
+      <button onclick="closeWinModal()">Close</button>
+    </div>
+  </div>
+
+  <script>
+    const emojis = ['🍎','🍌','🍓','🍇','🍉','🥑','🍍','🥝'];
+    const cards = [...emojis, ...emojis];
+    const gameBoard = document.getElementById("game-board");
+    const timerSpan = document.getElementById("timer");
+    const bestTimeSpan = document.getElementById("bestTime");
+    const winModal = document.getElementById("winModal");
+    const winText = document.getElementById("winText");
+
+    let flippedCards = [];
+    let matched = [];
+    let timer = 0;
+    let interval;
+
+    function shuffle(array) {
+      return array.sort(() => 0.5 - Math.random());
+    }
+
+    function startGame() {
+      gameBoard.innerHTML = "";
+      flippedCards = [];
+      matched = [];
+      timer = 0;
+      timerSpan.textContent = "0";
+
+      clearInterval(interval);
+      interval = setInterval(() => {
+        timer++;
+        timerSpan.textContent = timer;
+      }, 1000);
+
+      const shuffled = shuffle([...cards]);
+
+      shuffled.forEach((emoji, index) => {
+        const card = document.createElement("div");
+        card.classList.add("card");
+        card.dataset.emoji = emoji;
+        card.dataset.index = index;
+        card.textContent = "❓";
+        card.addEventListener("click", () => flipCard(card));
+        gameBoard.appendChild(card);
+      });
+
+      loadBestScore();
+    }
+
+    function flipCard(card) {
+      if (flippedCards.length === 2 || matched.includes(card.dataset.index)) return;
+
+      card.classList.add("flipped");
+      card.textContent = card.dataset.emoji;
+      flippedCards.push(card);
+
+      if (flippedCards.length === 2) {
+        const [c1, c2] = flippedCards;
+
+        if (c1.dataset.emoji === c2.dataset.emoji) {
+          matched.push(c1.dataset.index, c2.dataset.index);
+          flippedCards = [];
+
+          if (matched.length === cards.length) {
+            clearInterval(interval);
+            saveBestScore();
+            showWinModal();
+          }
+
+        } else {
+          setTimeout(() => {
+            c1.classList.remove("flipped");
+            c2.classList.remove("flipped");
+            c1.textContent = "❓";
+            c2.textContent = "❓";
+            flippedCards = [];
+          }, 800);
+        }
+      }
+    }
+
+    function saveBestScore() {
+      const best = localStorage.getItem("bestGameTime");
+      if (!best || timer < best) {
+        localStorage.setItem("bestGameTime", timer);
+      }
+    }
+
+    function loadBestScore() {
+      const best = localStorage.getItem("bestGameTime");
+      if (best) {
+        bestTimeSpan.textContent = best + "s";
+      }
+    }
+
+    function showWinModal() {
+      winText.textContent = `You completed the game in ${timer} seconds!`;
+      winModal.style.display = "block";
+    }
+
+    function closeWinModal() {
+      winModal.style.display = "none";
+    }
+
+    startGame();
+  </script>
+
+  <script src="global-nap.js"></script>
+
+</body>
+</html>

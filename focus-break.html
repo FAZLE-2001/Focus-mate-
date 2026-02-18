@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>🌟 Motivational Break - Focus-Mate</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      text-align: center;
+    }
+
+    #cooldown {
+      margin-top: 20px;
+      font-size: 18px;
+      color: #c0392b;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+
+    <!-- 🔗 Navigation -->
+    <nav style="text-align:center; margin-bottom:20px;">
+      <a href="index.html">🏠 Home</a> |
+      <a href="calendar.html">📅 Calendar</a> |
+      <a href="summary.html">📊 Summary</a> |
+      <a href="focus-break.html">🌟 Break</a> |
+      <a href="game.html">🧠 Brain Game</a> |
+      <a href="success-guide.html">🚀 Success Guide</a>
+    </nav>
+
+    <!-- 💤 Power Nap System -->
+    <div id="powerNapBox" class="power-nap-box">
+      💤 Power Nap:
+      <input type="time" id="napTime">
+      <button onclick="saveNapTime()">Set</button>
+      <button onclick="cancelNap()">Cancel</button>
+      <div id="napCountdown"></div>
+    </div>
+
+    <!-- Nap Modal -->
+    <div id="napModal" class="nap-modal">
+      <div class="nap-modal-content">
+        <h2>⏰ Power Nap Time!</h2>
+        <p>Take a short rest now 💤</p>
+        <button onclick="snoozeNap()">Snooze 10 min</button>
+        <button onclick="closeNapModal()">Dismiss</button>
+      </div>
+    </div>
+
+    <h1>🌟 Motivational Break</h1>
+    <p>
+      You can take a 15-minute break to refresh your mind.<br>
+      After 15 minutes, the break will lock for 30 minutes.
+    </p>
+
+    <button onclick="startBreak('https://www.youtube.com')">
+      🎥 Open YouTube
+    </button>
+
+    <button onclick="startBreak('https://www.google.com')">
+      🔍 Open Google
+    </button>
+
+    <div id="cooldown"></div>
+
+  </div>
+
+  <!-- Break Script -->
+  <script>
+    const cooldownText = document.getElementById("cooldown");
+
+    const BREAK_TIME = 15 * 60 * 1000;
+    const COOLDOWN_TIME = 30 * 60 * 1000;
+
+    function updateCooldownCountdown(endTime) {
+      const interval = setInterval(() => {
+
+        const now = Date.now();
+        const remaining = endTime - now;
+
+        if (remaining <= 0) {
+          cooldownText.textContent = "";
+          clearInterval(interval);
+          return;
+        }
+
+        const mins = Math.floor(remaining / 60000);
+        const secs = Math.floor((remaining % 60000) / 1000);
+
+        cooldownText.textContent =
+          `⏳ Cooldown: ${mins.toString().padStart(2,"0")}:${secs
+            .toString()
+            .padStart(2,"0")} remaining`;
+
+      }, 1000);
+    }
+
+    // Check on load
+    window.addEventListener("load", () => {
+      const lastBreak = parseInt(localStorage.getItem("lastBreak")) || 0;
+      const now = Date.now();
+
+      if (now - lastBreak < COOLDOWN_TIME) {
+        updateCooldownCountdown(lastBreak + COOLDOWN_TIME);
+      }
+    });
+
+    function startBreak(url) {
+
+      const lastBreak = parseInt(localStorage.getItem("lastBreak")) || 0;
+      const now = Date.now();
+
+      if (now - lastBreak < COOLDOWN_TIME) {
+        alert("⛔ You are in cooldown. Please wait.");
+        return;
+      }
+
+      window.open(url, "_blank");
+
+      localStorage.setItem("lastBreak", now);
+      updateCooldownCountdown(now + COOLDOWN_TIME);
+
+      alert("⏳ Your 15-minute break has started. Return after your break.");
+    }
+  </script>
+
+  <!-- Power Nap Script -->
+  <script src="global-nap.js"></script>
+
+</body>
+</html>
